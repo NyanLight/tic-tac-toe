@@ -23,7 +23,18 @@ const gameboard = (function () {
     }
   }
 
-  return { displayBoard, displayTotalScore, resetBoard};
+  function checkDraw() {
+    const emptySpots = gamefield.filter((spot) => spot.length > 0);
+    if (emptySpots > 0 && !checkVictory) {
+      return; 
+    } else {
+      console.log("It's draw!");
+      displayTotalScore(); 
+    }
+  };
+
+ 
+  return { displayBoard, displayTotalScore, resetBoard, checkDraw};
 })();
 
 function createPlayer(name) {
