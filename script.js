@@ -40,3 +40,16 @@ function createPlayer(name) {
 
   return { name, incrementVictories, greetings};
 };
+
+function playRound(firstPlayer, secondPlayer) {
+  const marks = ['X', '0'];
+  (function chooseMark() {
+    if (Math.random() > 0.5) {
+      firstPlayer.mark = marks[0];
+      secondPlayer.mark = marks[1];
+    } else {
+      firstPlayer.mark = marks[1];
+      secondPlayer.mark = marks[0];
+    };
+  })();
+}
