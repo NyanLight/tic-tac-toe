@@ -16,7 +16,14 @@ const gameboard = (function () {
       `Total score is ${totalScore.firstPlayer}:${totalScore.secondPlayer}`
     );
   }
-  return { displayBoard, displayTotalScore };
+
+  function resetBoard() {
+    for (const spot of gamefield) {
+      spot = "";
+    }
+  }
+
+  return { displayBoard, displayTotalScore, resetBoard};
 })();
 
 function createPlayer(name) {
@@ -33,5 +40,3 @@ function createPlayer(name) {
 
   return { name, incrementVictories, greetings};
 };
-
-
