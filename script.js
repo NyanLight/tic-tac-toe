@@ -3,12 +3,17 @@ const gameboard = (function () {
     firstPlayer: 0,
     secondPlayer: 0,
   };
-  let gamefield = ["", "", "", "", "", "", "", "", ""];
+  let gamefield = [
+    ["", "", ""],
+    ["", "", ""],
+    ["", "", ""],
+  ];
 
   function displayBoard() {
-    console.log(
-      `[${gamefield[0]}] [${gamefield[1]}] [${gamefield[2]}] \n[${gamefield[3]}] [${gamefield[4]}] [${gamefield[5]}] \n[${gamefield[6]}] [${gamefield[7]}] [${gamefield[8]}]`
-    );
+    for (row of gamefield) {
+      const joined = row.join(" ");
+      console.log(joined);
+    }
   }
 
   function displayTotalScore() {
@@ -26,15 +31,14 @@ const gameboard = (function () {
   function checkDraw() {
     const emptySpots = gamefield.filter((spot) => spot.length > 0);
     if (emptySpots > 0 && !checkVictory) {
-      return; 
+      return;
     } else {
       console.log("It's draw!");
-      displayTotalScore(); 
+      displayTotalScore();
     }
-  };
+  }
 
- 
-  return { displayBoard, displayTotalScore, resetBoard, checkDraw};
+  return { displayBoard, displayTotalScore, resetBoard, checkDraw };
 })();
 
 function createPlayer(name) {
@@ -49,11 +53,11 @@ function createPlayer(name) {
     console.log(`Hi, I'm ${playerName} and I've got ${victories} already`);
   }
 
-  return { name, incrementVictories, greetings};
-};
+  return { name, incrementVictories, greetings };
+}
 
-function playRound(firstPlayer, secondPlayer) {
-  const marks = ['X', '0'];
+function gameController(firstPlayer, secondPlayer) {
+  const marks = ["X", "0"];
   (function chooseMark() {
     if (Math.random() > 0.5) {
       firstPlayer.mark = marks[0];
@@ -61,6 +65,6 @@ function playRound(firstPlayer, secondPlayer) {
     } else {
       firstPlayer.mark = marks[1];
       secondPlayer.mark = marks[0];
-    };
+    }
   })();
 }
