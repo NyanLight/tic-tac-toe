@@ -24,5 +24,11 @@ const gameboard = (function () {
     return {displayField, cleanField, gamefield};
 })();
 
+function createPlayer (name) {
+    let victories = 0;
+    const displayVicrories = () => console.log(`${name} won ${victories} times!`);
+    
+    return {name, displayVicrories}; 
+}
 
 
