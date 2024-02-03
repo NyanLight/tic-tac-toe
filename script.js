@@ -16,7 +16,7 @@ const gameboard = (function () {
     const cleanField = function () {
         for (let i = 0; i < gamefield.length; i++) {
             for (let j = 0; j < gamefield[i].length; j++) {
-                gamefield[i][j] = '';
+                gamefield[i][j] = '-';
             }
         }
     }
@@ -26,9 +26,10 @@ const gameboard = (function () {
 
 function createPlayer (name) {
     let victories = 0;
+    const incrementVictories = () => victories++;
     const displayVicrories = () => console.log(`${name} won ${victories} times!`);
-    
-    return {name, displayVicrories}; 
+
+    return {name, displayVicrories, incrementVictories}; 
 }
 
 
