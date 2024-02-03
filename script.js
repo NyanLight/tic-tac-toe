@@ -32,4 +32,20 @@ function createPlayer (name) {
     return {name, displayVicrories, incrementVictories}; 
 }
 
+const gameController = function (playerOne, playerTwo) {
+
+    const marks = ['x', 'o'];
+    const markDistribution = function() {
+        if (Math.random() >= 0.5) {
+            playerOne.mark = marks[0];
+            playerTwo.mark = marks[1];
+        } else {
+            playerOne.mark = marks[1];
+            playerTwo.mark = marks[0];
+        }
+        console.log(`${playerOne} plays as ${playerOne.mark}`)
+        console.log(`${playerTwo} plays as ${playerTwo.mark}`)
+    }
+
+} 
 
