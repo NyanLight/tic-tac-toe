@@ -51,5 +51,10 @@ const gameController = function (playerOne, playerTwo) {
         console.log(`${playerTwo} plays as ${playerTwo.mark}`)
     }
 
+    let activePlayer = playerOne.mark === marks[0]? playerOne: playerTwo; 
+    const switchActivePlayer = function() {
+        activePlayer = activePlayer === playerOne? playerTwo: playerOne;
+    };
+
 } 
 
