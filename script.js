@@ -20,8 +20,12 @@ const gameboard = (function () {
             }
         }
     }
+
+   function makeTurn (row, column) {
+    gamefield[row][column] = activePlayer.mark;
+   }
     
-    return {displayField, cleanField, gamefield};
+    return {displayField, cleanField, makeTurn, gamefield};
 })();
 
 function createPlayer (name) {
