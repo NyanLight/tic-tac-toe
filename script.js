@@ -1,6 +1,6 @@
 const gameboard = (function () {
   let gamefield = [
-    ["x", "x", "-"],
+    ["x", "x", "x"],
     ["-", "x", "-"],
     ["x", "x", "x"],
   ];
@@ -77,7 +77,7 @@ const gameController = function (playerOne, playerTwo) {
 
     for (j = 0; j < gameboard.getGamefield().length; j++) {
       let column = 0;
-      for (i = 0; i < gameboard.getGamefield()[i][j].length; i++) {
+      for (i = 0; i < gameboard.getGamefield().length; i++) {
         if (gameboard.getGamefield()[i][j] == activePlayer.mark) column++;
       }
       if (column === 3) {
