@@ -30,7 +30,6 @@ const gameboard = (function () {
 })();
 
 function createPlayer(name) {
-  let victories = 0;
   const incrementVictories = () => victories++;
   const displayVicrories = () => console.log(`${name} won ${victories} times!`);
 
@@ -106,7 +105,20 @@ const gameController = function (playerOne, playerTwo) {
   
   let turnCounter = 0;
   const tieCheck = function () {
-    if (turnCounter === 9 && !checkWinner()) return true;
+    if (turnCounter === 9) return true;
   }
 
+  const playRound = (row, column) => {
+    console.log(`${activePlayer}'s turn is row ${row} and column ${column}`);
+    gameboard.makeTurn(row, column);
+    turnCounter++; 
+    if (checkWinner()) {
+        console.log(`${activePlayer} is a winner! Congratulations.`);
+    } else if (tieCheck()) {
+        console.log(`It's a tie game.`)
+    } else {
+        switchActivePlayer(); 
+        printNewRound();
+    }
+  } 
 };
