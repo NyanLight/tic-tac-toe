@@ -1,8 +1,8 @@
 const gameboard = (function () {
   let gamefield = [
-    ["-", "-", "-"],
-    ["-", "-", "-"],
-    ["-", "-", "-"],
+    ["x", "x", "-"],
+    ["-", "x", "-"],
+    ["x", "x", "x"],
   ];
 
   const displayField = function () {
@@ -86,13 +86,13 @@ const gameController = function (playerOne, playerTwo) {
       }
     }
 
-    let diagonalCounter;
+    let diagonalCounter = 0;
     for (i = 0; i < gameboard.getGamefield().length; i++) {
       if (gameboard.getGamefield()[i][i] === activePlayer.mark) diagonalCounter++;
     }
     if (diagonalCounter === 3) diagonal = true;
 
-    let antiCounter;
+    let antiCounter = 0;
     for (i = 0; i < gameboard.getGamefield().length; i++) {
       for (j = 2; j == 0; j--) {
         if (gameboard.getGamefield()[i][j] === activePlayer.mark) antiCounter++;
