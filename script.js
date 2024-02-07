@@ -24,8 +24,10 @@ const gameboard = (function () {
    function makeTurn (row, column) {
     gamefield[row][column] = activePlayer.mark;
    }
+
+   const getGamefield = () => gamefield;
     
-    return {displayField, cleanField, makeTurn, gamefield};
+    return {displayField, cleanField, makeTurn, getGamefield};
 })();
 
 function createPlayer (name) {
@@ -60,5 +62,32 @@ const gameController = function (playerOne, playerTwo) {
         gameboard.displayField();
         console.log(`${activePlayer}, it's your turn!`);
     };
+
+
+    const checkWinner = function() {
+        let rows, columns, diagonal, anti;
+
+        for (let i = 0; i < getGamefield().length; i++) {
+            let row = 0; 
+            for (let j = 0; j < getGamefield()[i].length; j++) {
+                if (getGamefield()[i][j] == activePlayer.mark) () => row++; 
+            }
+            if (row === 3) {
+                rows = true;
+                break;
+            };
+        }
+
+        for (j = 0; j < getGamefield().length; j++) {
+            let column = 0;
+            for (i = 0; i < getGamefield()[i][j].length; i++) {
+                if (getGamefield()[i][j] == activePlayer.mark) () => column++; 
+            }
+            if (column === 3) {
+                columns = true;
+                break;
+            }
+        }
+    }
 } 
 
