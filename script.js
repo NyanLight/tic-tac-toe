@@ -49,6 +49,7 @@ const gameController = function (playerOne, playerTwo) {
     console.log(`${playerOne} plays as ${playerOne.mark}`);
     console.log(`${playerTwo} plays as ${playerTwo.mark}`);
   };
+  markDistribution();
 
   let activePlayer = playerOne.mark === marks[0] ? playerOne : playerTwo;
   const switchActivePlayer = function () {
@@ -121,4 +122,8 @@ const gameController = function (playerOne, playerTwo) {
       printNewRound();
     }
   };
+
+  printNewRound();
+
+  return {playRound};
 };
