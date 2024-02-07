@@ -56,5 +56,9 @@ const gameController = function (playerOne, playerTwo) {
         activePlayer = activePlayer === playerOne? playerTwo: playerOne;
     };
 
+    const printNewRound = function() {
+        gameboard.displayField();
+        console.log(`${activePlayer}, it's your turn!`);
+    };
 } 
 
