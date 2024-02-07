@@ -103,4 +103,10 @@ const gameController = function (playerOne, playerTwo) {
   if (rows === true || columns === true || diagonal === true || anti === true)
     return true;
   }
+  
+  let turnCounter = 0;
+  const tieCheck = function () {
+    if (turnCounter === 9 && !checkWinner()) return true;
+  }
+
 };
