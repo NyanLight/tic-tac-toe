@@ -46,8 +46,8 @@ const gameController = function (playerOne, playerTwo) {
       playerOne.mark = marks[1];
       playerTwo.mark = marks[0];
     }
-    console.log(`${playerOne} plays as ${playerOne.mark}`);
-    console.log(`${playerTwo} plays as ${playerTwo.mark}`);
+    console.log(`${playerOne.name} plays as ${playerOne.mark}`);
+    console.log(`${playerTwo.name} plays as ${playerTwo.mark}`);
   };
   markDistribution();
 
@@ -58,7 +58,7 @@ const gameController = function (playerOne, playerTwo) {
 
   const printNewRound = function () {
     gameboard.displayField();
-    console.log(`${activePlayer}, it's your turn!`);
+    console.log(`${activePlayer.name}, it's your turn!`);
   };
 
   const checkWinner = function () {
@@ -110,11 +110,11 @@ const gameController = function (playerOne, playerTwo) {
   };
 
   const playRound = (row, column) => {
-    console.log(`${activePlayer}'s turn is row ${row} and column ${column}`);
+    console.log(`${activePlayer.name}'s turn is row ${row} and column ${column}`);
     gameboard.makeTurn(row, column);
     turnCounter++;
     if (checkWinner()) {
-      console.log(`${activePlayer} is a winner! Congratulations.`);
+      console.log(`${activePlayer.name} is a winner! Congratulations.`);
     } else if (tieCheck()) {
       console.log(`It's a tie game.`);
     } else {
@@ -127,3 +127,7 @@ const gameController = function (playerOne, playerTwo) {
 
   return {playRound};
 };
+
+const playerOne = createPlayer(prompt('Who is the first player?'));
+const playerTwo = createPlayer(prompt('Who is the second player?'));
+const game = gameController(playerOne, playerTwo);
