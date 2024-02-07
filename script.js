@@ -70,7 +70,7 @@ const gameController = function (playerOne, playerTwo) {
         for (let i = 0; i < getGamefield().length; i++) {
             let row = 0; 
             for (let j = 0; j < getGamefield()[i].length; j++) {
-                if (getGamefield()[i][j] == activePlayer.mark) () => row++; 
+                if (getGamefield()[i][j] == activePlayer.mark) row++; 
             }
             if (row === 3) {
                 rows = true;
@@ -81,13 +81,27 @@ const gameController = function (playerOne, playerTwo) {
         for (j = 0; j < getGamefield().length; j++) {
             let column = 0;
             for (i = 0; i < getGamefield()[i][j].length; i++) {
-                if (getGamefield()[i][j] == activePlayer.mark) () => column++; 
+                if (getGamefield()[i][j] == activePlayer.mark) column++; 
             }
             if (column === 3) {
                 columns = true;
                 break;
             }
         }
+
+        let diagonalCounter;
+        for (i = 0; i < getGamefield().length; i++) {
+            if (getGamefield()[i][i] === activePlayer.mark) diagonalCounter++;
+        }
+        if (diagonalCounter === 3) diagonal = true; 
     }
+
+        let antiCounter;
+        for (i = 0; i < getGamefield().length; i++) {
+            for (j = 2; j == 0; j--) {
+                if (getGamefield()[i][j] === activePlayer.mark) antiCounter++; 
+            }
+        }
+        if (antiCounter === 3) anti = true; 
 } 
 
