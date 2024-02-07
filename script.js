@@ -91,34 +91,34 @@ const gameController = function (playerOne, playerTwo) {
     }
     if (diagonalCounter === 3) diagonal = true;
 
-  let antiCounter;
-  for (i = 0; i < getGamefield().length; i++) {
-    for (j = 2; j == 0; j--) {
-      if (getGamefield()[i][j] === activePlayer.mark) antiCounter++;
+    let antiCounter;
+    for (i = 0; i < getGamefield().length; i++) {
+      for (j = 2; j == 0; j--) {
+        if (getGamefield()[i][j] === activePlayer.mark) antiCounter++;
+      }
     }
-  }
-  if (antiCounter === 3) anti = true;
+    if (antiCounter === 3) anti = true;
 
-  if (rows === true || columns === true || diagonal === true || anti === true)
-    return true;
-  }
-  
+    if (rows === true || columns === true || diagonal === true || anti === true)
+      return true;
+  };
+
   let turnCounter = 0;
   const tieCheck = function () {
     if (turnCounter === 9) return true;
-  }
+  };
 
   const playRound = (row, column) => {
     console.log(`${activePlayer}'s turn is row ${row} and column ${column}`);
     gameboard.makeTurn(row, column);
-    turnCounter++; 
+    turnCounter++;
     if (checkWinner()) {
-        console.log(`${activePlayer} is a winner! Congratulations.`);
+      console.log(`${activePlayer} is a winner! Congratulations.`);
     } else if (tieCheck()) {
-        console.log(`It's a tie game.`)
+      console.log(`It's a tie game.`);
     } else {
-        switchActivePlayer(); 
-        printNewRound();
+      switchActivePlayer();
+      printNewRound();
     }
-  } 
+  };
 };
