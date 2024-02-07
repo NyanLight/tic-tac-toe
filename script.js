@@ -20,8 +20,8 @@ const gameboard = (function () {
     }
   };
 
-  function makeTurn(row, column) {
-    gamefield[row][column] = activePlayer.mark;
+  function makeTurn(row, column, mark) {
+    gamefield[row][column] = mark;
   }
 
   const getGamefield = () => gamefield;
@@ -64,10 +64,10 @@ const gameController = function (playerOne, playerTwo) {
   const checkWinner = function () {
     let rows, columns, diagonal, anti;
 
-    for (let i = 0; i < getGamefield().length; i++) {
+    for (let i = 0; i < gameboard.getGamefield().length; i++) {
       let row = 0;
-      for (let j = 0; j < getGamefield()[i].length; j++) {
-        if (getGamefield()[i][j] == activePlayer.mark) row++;
+      for (let j = 0; j < gameboard.getGamefield()[i].length; j++) {
+        if (gameboard.getGamefield()[i][j] == activePlayer.mark) row++;
       }
       if (row === 3) {
         rows = true;
@@ -75,10 +75,10 @@ const gameController = function (playerOne, playerTwo) {
       }
     }
 
-    for (j = 0; j < getGamefield().length; j++) {
+    for (j = 0; j < gameboard.getGamefield().length; j++) {
       let column = 0;
-      for (i = 0; i < getGamefield()[i][j].length; i++) {
-        if (getGamefield()[i][j] == activePlayer.mark) column++;
+      for (i = 0; i < gameboard.getGamefield()[i][j].length; i++) {
+        if (gameboard.getGamefield()[i][j] == activePlayer.mark) column++;
       }
       if (column === 3) {
         columns = true;
@@ -87,15 +87,15 @@ const gameController = function (playerOne, playerTwo) {
     }
 
     let diagonalCounter;
-    for (i = 0; i < getGamefield().length; i++) {
-      if (getGamefield()[i][i] === activePlayer.mark) diagonalCounter++;
+    for (i = 0; i < gameboard.getGamefield().length; i++) {
+      if (gameboard.getGamefield()[i][i] === activePlayer.mark) diagonalCounter++;
     }
     if (diagonalCounter === 3) diagonal = true;
 
     let antiCounter;
-    for (i = 0; i < getGamefield().length; i++) {
+    for (i = 0; i < gameboard.getGamefield().length; i++) {
       for (j = 2; j == 0; j--) {
-        if (getGamefield()[i][j] === activePlayer.mark) antiCounter++;
+        if (gameboard.getGamefield()[i][j] === activePlayer.mark) antiCounter++;
       }
     }
     if (antiCounter === 3) anti = true;
@@ -110,8 +110,10 @@ const gameController = function (playerOne, playerTwo) {
   };
 
   const playRound = (row, column) => {
-    console.log(`${activePlayer.name}'s turn is row ${row} and column ${column}`);
-    gameboard.makeTurn(row, column);
+    console.log(
+      `${activePlayer.name}'s turn is row ${row} and column ${column}`
+    );
+    gameboard.makeTurn(row, column, mark = activePlayer.mark);
     turnCounter++;
     if (checkWinner()) {
       console.log(`${activePlayer.name} is a winner! Congratulations.`);
@@ -125,9 +127,9 @@ const gameController = function (playerOne, playerTwo) {
 
   printNewRound();
 
-  return {playRound};
+  return { playRound };
 };
 
-const playerOne = createPlayer(prompt('Who is the first player?'));
-const playerTwo = createPlayer(prompt('Who is the second player?'));
+const playerOne = createPlayer(prompt("Who is the first player?"));
+const playerTwo = createPlayer(prompt("Who is the second player?"));
 const game = gameController(playerOne, playerTwo);
