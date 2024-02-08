@@ -58,7 +58,7 @@ const gameController = function (
   const switchActivePlayer = function () {
     activePlayer = activePlayer === playerOne ? playerTwo : playerOne;
   };
-  const getActivePlayer = () => activePlayer; 
+  const getActivePlayer = () => activePlayer.name; 
 
   const printNewRound = function () {
     gameboard.displayField();
@@ -140,11 +140,11 @@ function screenController() {
   const playerTwo = createPlayer(prompt("Who is the second player?"));
   const game = gameController(playerOne, playerTwo);
 
-  const turnDiv = document.getElementsByClassName("turn");
-  const boardDiv = document.getElementsByClassName("board");
+  const turnDiv = document.getElementById("turn");
+  const boardDiv = document.getElementById("board");
 
   function updateScreen() {
-    turnDiv.textContent = `${gameController.getActivePlayer()}, it's your turn!`;
+    turnDiv.textContent = `${game.getActivePlayer()}, it's your turn!`;
     boardDiv.textContent = '';
 
     gameboard.getGamefield().forEach((row, rowIndex) => {
@@ -154,10 +154,24 @@ function screenController() {
         cellButton.dataset.column = columnIndex;
         cellButton.dataset.row = rowIndex;
         cellButton.textContent = gameboard.getGamefield()[rowIndex][columnIndex];
-        boardDiv.appendChild(cellButton) 
+        boardDiv.appendChild(cellButton); 
       }
       );
     });
   };
 
-}
+  function clickHandler(e) {
+    const clickedRow = e.target.dataset.row;
+    const clickerColumn = e.target.dataset.column;
+    if (!e.target.dataset.row || !e.target.dataset.column) return; 
+
+    game.playRound(clickedRow, clickerColumn);
+    updateScreen(); 
+  }
+
+  window.addEventListener("click", clickHandler);
+
+  updateScreen();
+};
+
+screenController();
