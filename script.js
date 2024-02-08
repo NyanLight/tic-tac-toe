@@ -36,7 +36,10 @@ function createPlayer(name) {
   return { name, displayVicrories, incrementVictories };
 }
 
-const gameController = function (playerOne, playerTwo) {
+const gameController = function (
+  playerOne = "First player",
+  playerTwo = "Second Player"
+) {
   const marks = ["x", "o"];
   const markDistribution = function () {
     if (Math.random() >= 0.5) {
@@ -131,6 +134,11 @@ const gameController = function (playerOne, playerTwo) {
   return { playRound };
 };
 
-// const playerOne = createPlayer(prompt("Who is the first player?"));
-// const playerTwo = createPlayer(prompt("Who is the second player?"));
-// const game = gameController(playerOne, playerTwo);
+function screenController() {
+  const playerOne = createPlayer(prompt("Who is the first player?"));
+  const playerTwo = createPlayer(prompt("Who is the second player?"));
+  const game = gameController(playerOne, playerTwo);
+
+  const turnDiv = document.getElementsByClassName("turn");
+  const boardDiv = document.getElementsByClassName("board");
+}
