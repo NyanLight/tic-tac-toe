@@ -58,6 +58,7 @@ const gameController = function (
   const switchActivePlayer = function () {
     activePlayer = activePlayer === playerOne ? playerTwo : playerOne;
   };
+  const getActivePlayer = () => activePlayer; 
 
   const printNewRound = function () {
     gameboard.displayField();
@@ -131,7 +132,7 @@ const gameController = function (
 
   printNewRound();
 
-  return { playRound };
+  return { playRound, getActivePlayer};
 };
 
 function screenController() {
@@ -141,4 +142,22 @@ function screenController() {
 
   const turnDiv = document.getElementsByClassName("turn");
   const boardDiv = document.getElementsByClassName("board");
+
+  function updateScreen() {
+    turnDiv.textContent = `${gameController.getActivePlayer()}, it's your turn!`;
+    boardDiv.textContent = '';
+
+    gameboard.getGamefield().forEach((row, rowIndex) => {
+      row.forEach((cell, columnIndex) => {
+        const cellButton = document.createElement('button');
+        cellButton.classList.add('cell');
+        cellButton.dataset.column = columnIndex;
+        cellButton.dataset.row = rowIndex;
+        cellButton.textContent = gameboard.getGamefield()[rowIndex][columnIndex];
+        boardDiv.appendChild(cellButton) 
+      }
+      );
+    });
+  };
+
 }
