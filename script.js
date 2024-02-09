@@ -142,6 +142,7 @@ function screenController() {
 
   const turnDiv = document.getElementById("turn");
   const boardDiv = document.getElementById("board");
+  const restartBtn = document.getElementById('restartBtn');
 
   function updateScreen() {
     turnDiv.textContent = `${game.getActivePlayer()}, it's your turn!`;
@@ -163,13 +164,19 @@ function screenController() {
   function clickHandler(e) {
     const clickedRow = e.target.dataset.row;
     const clickerColumn = e.target.dataset.column;
-    if (!e.target.dataset.row || !e.target.dataset.column) return; 
+    if (!e.target.dataset.row || !e.target.dataset.column || e.target.textContent !== '-') return; 
 
     game.playRound(clickedRow, clickerColumn);
     updateScreen(); 
   }
 
-  window.addEventListener("click", clickHandler);
+  function restartGame () {
+    gameboard.cleanField();
+    updateScreen();
+  }
+
+  restartBtn.addEventListener('click', restartGame);
+  boardDiv.addEventListener("click", clickHandler);
 
   updateScreen();
 };
