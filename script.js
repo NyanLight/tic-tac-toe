@@ -65,6 +65,12 @@ const gameController = function (
     console.log(`${activePlayer.name}, it's your turn!`);
   };
 
+  const restartGame = function () {
+    markDistribution();
+    activePlayer = playerOne.mark === marks[0] ? playerOne : playerTwo;
+    gameboard.cleanField();
+  };
+
   const checkWinner = function () {
     let rows, columns, diagonal, anti;
 
@@ -132,7 +138,7 @@ const gameController = function (
 
   printNewRound();
 
-  return { playRound, getActivePlayer};
+  return { playRound, getActivePlayer, restartGame};
 };
 
 function screenController() {
@@ -170,12 +176,12 @@ function screenController() {
     updateScreen(); 
   }
 
-  function restartGame () {
-    gameboard.cleanField();
+  function restartHandler () {
+    game.restartGame();
     updateScreen();
   }
 
-  restartBtn.addEventListener('click', restartGame);
+  restartBtn.addEventListener('click', restartHandler); 
   boardDiv.addEventListener("click", clickHandler);
 
   updateScreen();
