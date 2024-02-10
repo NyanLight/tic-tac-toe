@@ -66,15 +66,10 @@ const gameController = function (
     console.log(`${activePlayer.name}, it's your turn!`);
   };
 
-  const restartGame = function () {
-    markDistribution();
-    activePlayer = playerOne.mark === marks[0] ? playerOne : playerTwo;
-    gameboard.cleanField();
-  };
-
+  
   const checkWinner = function () {
     let rows, columns, diagonal, anti;
-
+    
     for (let i = 0; i < gameboard.getGamefield().length; i++) {
       let row = 0;
       for (let j = 0; j < gameboard.getGamefield()[i].length; j++) {
@@ -85,7 +80,7 @@ const gameController = function (
         break;
       }
     }
-
+    
     for (j = 0; j < gameboard.getGamefield().length; j++) {
       let column = 0;
       for (i = 0; i < gameboard.getGamefield().length; i++) {
@@ -96,42 +91,53 @@ const gameController = function (
         break;
       }
     }
-
+    
     let diagonalCounter = 0;
     for (i = 0; i < gameboard.getGamefield().length; i++) {
       if (gameboard.getGamefield()[i][i] === activePlayer.mark)
-        diagonalCounter++;
-    }
-    if (diagonalCounter === 3) diagonal = true;
+      diagonalCounter++;
+  }
+  if (diagonalCounter === 3) diagonal = true;
+  
+  let antiCounter = 0;
+  j = 2;
+  for (i = 0; i < gameboard.getGamefield().length; i++) {
+    if (gameboard.getGamefield()[i][j] === activePlayer.mark) antiCounter++;
+    j--;
+  }
+  if (antiCounter === 3) anti = true;
+  
+  if (rows === true || columns === true || diagonal === true || anti === true)
+  return true;
+};
 
-    let antiCounter = 0;
-    j = 2;
-    for (i = 0; i < gameboard.getGamefield().length; i++) {
-      if (gameboard.getGamefield()[i][j] === activePlayer.mark) antiCounter++;
-      j--;
-    }
-    if (antiCounter === 3) anti = true;
+let turnCounter = 0;
+const tieCheck = function () {
+  if (turnCounter === 9) return true;
+};
 
-    if (rows === true || columns === true || diagonal === true || anti === true)
-      return true;
-  };
+const restartGame = function () {
+  markDistribution();
+  activePlayer = playerOne.mark === marks[0] ? playerOne : playerTwo;
+  gameboard.cleanField();
+  turnCounter = 0;
+};
 
-  let turnCounter = 0;
-  const tieCheck = function () {
-    if (turnCounter === 9) return true;
-  };
-
-  const playRound = (row, column) => {
-    console.log(
-      `${activePlayer.name}'s turn is row ${row} and column ${column}`
+const playRound = (row, column) => {
+  console.log(
+    `${activePlayer.name}'s turn is row ${row} and column ${column}`
     );
     gameboard.makeTurn(row, column, (mark = activePlayer.mark));
     turnCounter++;
     if (checkWinner()) {
       (activePlayer === playerOne)? playerOne.addVictory(): playerTwo.addVictory();
+      printNewRound();
       console.log(`${activePlayer.name} is a winner! Congratulations.`);
+      return 'win';
     } else if (tieCheck()) {
+      printNewRound();
       console.log(`It's a tie game.`);
+      return 'tie';
     } else {
       switchActivePlayer();
       printNewRound();
