@@ -30,15 +30,16 @@ const gameboard = (function () {
 })();
 
 function createPlayer(name) {
-  const incrementVictories = () => victories++;
-  const displayVicrories = () => console.log(`${name} won ${victories} times!`);
+  let victories = 0; 
+  const addVictory = () => victories++;
+  const getVicrories = () => victories;
 
-  return { name, displayVicrories, incrementVictories };
+  return { name, getVicrories, addVictory};
 }
 
 const gameController = function (
-  playerOne = "First player",
-  playerTwo = "Second Player"
+  playerOne,
+  playerTwo 
 ) {
   const marks = ["x", "o"];
   const markDistribution = function () {
@@ -127,6 +128,7 @@ const gameController = function (
     gameboard.makeTurn(row, column, (mark = activePlayer.mark));
     turnCounter++;
     if (checkWinner()) {
+      (activePlayer === playerOne)? playerOne.addVictory(): playerTwo.addVictory();
       console.log(`${activePlayer.name} is a winner! Congratulations.`);
     } else if (tieCheck()) {
       console.log(`It's a tie game.`);
@@ -142,8 +144,8 @@ const gameController = function (
 };
 
 function screenController() {
-  const playerOne = createPlayer(prompt("Who is the first player?"));
-  const playerTwo = createPlayer(prompt("Who is the second player?"));
+  const playerOne = createPlayer('First');
+  const playerTwo = createPlayer('Second');
   const game = gameController(playerOne, playerTwo);
 
   const turnDiv = document.getElementById("turn");
