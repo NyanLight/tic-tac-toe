@@ -195,7 +195,7 @@ function screenController() {
     if (turn === "win") {
       updateScreen();
       resultDiv.textContent = `${
-        game.getActivePlayer().name
+        game.getActivePlayer()
       } is a winner. Congratulations!`;
       disableButtons();
     } else if (turn === "tie") {
