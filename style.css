@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'Boldins';
+    src: url(media/Boldins.ttf);
+}   
+
 *{
     box-sizing: border-box;
 }
@@ -25,12 +30,17 @@ header {
     width: 100%;
     text-align: center;
     font-family: 'Noto Sans JP', sans-serif;
-    background-color: rgb(255, 0, 191);
-
+    background-color: rgb(250, 0, 187);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
 }
 
 h1 {
-    font-size: 4rem;
+    font-size: 5rem;
+    font-family: 'Boldins';
 }
 
 main {
@@ -64,10 +74,11 @@ main {
     width: 5rem;
 }
 
+
 #restart {
     width: 8rem;
     height: 4rem;
-    background-color: rgb(255, 0, 191);
+    background-color: rgb(250, 0, 187);
 }
 
 #restart img {
