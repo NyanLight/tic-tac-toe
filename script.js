@@ -156,10 +156,12 @@ function screenController() {
   const boardDiv = document.getElementById("board");
   const restartBtn = document.getElementById("restartBtn");
   const resultDiv = document.getElementById("result");
+  const scoreDiv = document.getElementById('score');
 
   function updateScreen() {
     turnDiv.textContent = `${game.getActivePlayer()}, it's your turn!`;
     boardDiv.textContent = "";
+    scoreDiv.textContent = `${playerOne.getVicrories()} : ${playerTwo.getVicrories()}`
 
     gameboard.getGamefield().forEach((row, rowIndex) => {
       row.forEach((cell, columnIndex) => {
