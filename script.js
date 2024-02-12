@@ -126,9 +126,9 @@ const gameController = function (playerOne, playerTwo) {
 
 function screenController() {
   let playerOne = createPlayer(prompt('Who is the first player?'));
-  if (!playerOne.name) playerOne.name = 'First player';
+  if (!playerOne.name) playerOne.name = 'Kitty';
   let playerTwo = createPlayer(prompt('Who is the second player?'));
-  if (!playerTwo.name) playerTwo.name = 'Second player';
+  if (!playerTwo.name) playerTwo.name = 'Patch';
   const game = gameController(playerOne, playerTwo);
 
   const turnDiv = document.getElementById("turn");
@@ -147,8 +147,18 @@ function screenController() {
         cellButton.classList.add("cell");
         cellButton.dataset.column = columnIndex;
         cellButton.dataset.row = rowIndex;
-        cellButton.textContent =
-          gameboard.getGamefield()[rowIndex][columnIndex];
+        const target = gameboard.getGamefield()[rowIndex][columnIndex];
+        if (target === 'x') {
+          const kitty = document.createElement('img');
+          kitty.classList.add('icon');
+          kitty.src = './media/brand-hello-kitty-svgrepo-com.svg';
+          cellButton.appendChild(kitty);
+        } else if (target === 'o') {
+          const patch = document.createElement('img');
+          patch.classList.add('icon');
+          patch.src = './media/patch-svgrepo-com.svg';
+          cellButton.appendChild(patch);
+        } 
         boardDiv.appendChild(cellButton);
       });
     });
