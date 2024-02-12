@@ -148,14 +148,13 @@ const gameController = function (playerOne, playerTwo) {
 };
 
 function screenController() {
-  const playerOne = createPlayer(prompt("Who is the first player?"));
-  const playerTwo = createPlayer(prompt('Who is the second player?'));
+  const playerOne = createPlayer('FIrst');
+  const playerTwo = createPlayer('Second');
   const game = gameController(playerOne, playerTwo);
 
   const turnDiv = document.getElementById("turn");
   const boardDiv = document.getElementById("board");
-  const restartBtn = document.getElementById("restartBtn");
-  const resultDiv = document.getElementById("result");
+  const restartBtn = document.getElementById("restart");
   const scoreDiv = document.getElementById('score');
 
   function updateScreen() {
@@ -196,15 +195,13 @@ function screenController() {
     const turn = game.playRound(clickedRow, clickerColumn);
     if (turn === "win") {
       updateScreen();
-      turnDiv.textContent = '';
-      resultDiv.textContent = `${
+      turnDiv.textContent = `${
         game.getActivePlayer()
       } is a winner. Congratulations!`;
       disableButtons();
     } else if (turn === "tie") {
       updateScreen();
-      turnDiv.textContent = '';
-      resultDiv.textContent = `It's a tie game! Try again`;
+      turnDiv.textContent = `It's a tie game! Try again`;
       disableButtons();
     } else {
       updateScreen();
@@ -214,7 +211,6 @@ function screenController() {
   function restartHandler() {
     game.restartGame();
     updateScreen();
-    resultDiv.textContent = '';
   }
 
   restartBtn.addEventListener("click", restartHandler);
