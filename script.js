@@ -1,14 +1,14 @@
 const gameboard = (function () {
   let gamefield = [
-    ["-", "-", "-"],
-    ["-", "-", "-"],
-    ["-", "-", "-"],
+    ["", "", ""],
+    ["", "", ""],
+    ["", "", ""],
   ];
 
   const cleanField = function () {
     for (let i = 0; i < gamefield.length; i++) {
       for (let j = 0; j < gamefield[i].length; j++) {
-        gamefield[i][j] = "-";
+        gamefield[i][j] = "";
       }
     }
   };
@@ -165,7 +165,7 @@ function screenController() {
     if (
       !e.target.dataset.row ||
       !e.target.dataset.column ||
-      e.target.textContent !== "-"
+      e.target.textContent !== ""
     )
       return;
 
