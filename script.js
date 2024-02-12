@@ -148,8 +148,8 @@ const gameController = function (playerOne, playerTwo) {
 };
 
 function screenController() {
-  const playerOne = createPlayer('FIrst');
-  const playerTwo = createPlayer('Second');
+  const playerOne = createPlayer(prompt('Who is the first player?'));
+  const playerTwo = createPlayer(prompt('Who is the second player?'));
   const game = gameController(playerOne, playerTwo);
 
   const turnDiv = document.getElementById("turn");
