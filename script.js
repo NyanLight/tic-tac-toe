@@ -5,13 +5,6 @@ const gameboard = (function () {
     ["-", "-", "-"],
   ];
 
-  const displayField = function () {
-    for (let i = 0; i < gamefield.length; i++) {
-      const string = gamefield[i].join("|");
-      console.log(string);
-    }
-  };
-
   const cleanField = function () {
     for (let i = 0; i < gamefield.length; i++) {
       for (let j = 0; j < gamefield[i].length; j++) {
@@ -26,7 +19,7 @@ const gameboard = (function () {
 
   const getGamefield = () => gamefield;
 
-  return { displayField, cleanField, makeTurn, getGamefield };
+  return {cleanField, makeTurn, getGamefield };
 })();
 
 function createPlayer(name) {
@@ -47,8 +40,6 @@ const gameController = function (playerOne, playerTwo) {
       playerOne.mark = marks[1];
       playerTwo.mark = marks[0];
     }
-    console.log(`${playerOne.name} plays as ${playerOne.mark}`);
-    console.log(`${playerTwo.name} plays as ${playerTwo.mark}`);
   };
   markDistribution();
 
@@ -57,12 +48,7 @@ const gameController = function (playerOne, playerTwo) {
     activePlayer = activePlayer === playerOne ? playerTwo : playerOne;
   };
   const getActivePlayer = () => activePlayer.name;
-
-  const printNewRound = function () {
-    gameboard.displayField();
-    console.log(`${activePlayer.name}, it's your turn!`);
-  };
-
+  
   const checkWinner = function () {
     let rows, columns, diagonal, anti;
 
@@ -120,29 +106,20 @@ const gameController = function (playerOne, playerTwo) {
   };
 
   const playRound = (row, column) => {
-    console.log(
-      `${activePlayer.name}'s turn is row ${row} and column ${column}`
-    );
     gameboard.makeTurn(row, column, (mark = activePlayer.mark));
     turnCounter++;
     if (checkWinner()) {
       activePlayer === playerOne
         ? playerOne.addVictory()
         : playerTwo.addVictory();
-      printNewRound();
-      console.log(`${activePlayer.name} is a winner! Congratulations.`);
       return "win";
     } else if (tieCheck()) {
-      printNewRound();
-      console.log(`It's a tie game.`);
       return "tie";
     } else {
       switchActivePlayer();
-      printNewRound();
     }
   };
 
-  printNewRound();
 
   return { playRound, getActivePlayer, restartGame };
 };
