@@ -34,12 +34,10 @@ h1 {
 main {
     font-family: 'Protest Strike', sans-serif;
     font-size: 1.4rem;
-}
-
-#score,
-#turn,
-#result {
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .cell {
@@ -52,13 +50,13 @@ main {
 
 #restart {
     width: 6rem;
-    height: 5rem;
+    height: 3rem;
     background-color: rgb(206, 206, 206);
 }
 
 #restart img {
     width: 3rem;
-    height: 3rem;
+    height: 2.5rem;
 }
 
 footer {
