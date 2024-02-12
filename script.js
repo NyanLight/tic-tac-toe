@@ -194,12 +194,14 @@ function screenController() {
     const turn = game.playRound(clickedRow, clickerColumn);
     if (turn === "win") {
       updateScreen();
+      turnDiv.textContent = '';
       resultDiv.textContent = `${
         game.getActivePlayer()
       } is a winner. Congratulations!`;
       disableButtons();
     } else if (turn === "tie") {
       updateScreen();
+      turnDiv.textContent = '';
       resultDiv.textContent = `It's a tie game! Try again`;
       disableButtons();
     } else {
