@@ -125,8 +125,10 @@ const gameController = function (playerOne, playerTwo) {
 };
 
 function screenController() {
-  const playerOne = createPlayer(prompt('Who is the first player?'));
-  const playerTwo = createPlayer(prompt('Who is the second player?'));
+  let playerOne = createPlayer(prompt('Who is the first player?'));
+  if (!playerOne.name) playerOne.name = 'First player';
+  let playerTwo = createPlayer(prompt('Who is the second player?'));
+  if (!playerTwo.name) playerTwo.name = 'Second player';
   const game = gameController(playerOne, playerTwo);
 
   const turnDiv = document.getElementById("turn");
